@@ -1,7 +1,4 @@
-
-
 import React, { Component, useState } from "react";
-import '../styles/App.css';
 
 const App = () => {
   const [nameMessage, setNameMessage] = useState("");
@@ -11,7 +8,8 @@ const App = () => {
   const [error, setError] = useState("");
   const [congrats, setCongrats] = useState("");
 
-  const validation = () => {
+  const validation = (e) => {
+    e.preventDefault();
     const Name = document.querySelector("input[data-testid=name]").value;
     const email = document.querySelector("input[data-testid=email]").value;
     const phone = document.querySelector("input[data-testid=phoneNumber]")
@@ -21,53 +19,84 @@ const App = () => {
 
     if (Name === "" || phone === "" || password === "" || email === "") {
       setError("All fields are mandatory");
+      setCongrats("");
+      setNameMessage("");
+      setEmailMessage("");
+      setPasswordMessage("");
     } else if (!isNaN(Name)) {
       setNameMessage("Name is not alphanumeric");
+      setCongrats("");
+      setError("");
+      setEmailMessage("");
+      setPasswordMessage("");
     } else if (email.indexOf("@") === -1) {
       setEmailMessage("Email must contain @");
+      setCongrats("");
+      setError("");
+      setNameMessage("");
+      setPasswordMessage("");
     } else if (isNaN(phone)) {
       setPhoneMessage("Phone Number must contain only numbers");
+      setCongrats("");
+      setError("");
+      setNameMessage("");
+      setEmailMessage("");
+      setPasswordMessage("");
     } else if (password.length <= 6) {
       setPasswordMessage("Password must contain atleast 6 letters");
+      setCongrats("");
+      setError("");
+      setNameMessage("");
+      setEmailMessage("");
+      setPhoneMessage("");
     } else {
-      let userName = email.slice(0,email.indexOf('@'));
+      let userName = email.slice(0, email.indexOf("@"));
       setCongrats(`Hello ${userName}`);
+      setError("");
+      setNameMessage("");
+      setEmailMessage("");
+      setPhoneMessage("");
+      setPasswordMessage("");
     }
   };
   return (
     <>
-      <form actio="#" onSubmit={validation}>
+      <form onSubmit={validation}>
         <div>
           Name :
           <input type="text" data-testid="name" />
-          <span>{nameMessage}</span>
+          <div>{nameMessage}</div>
         </div>
+        <br />
         <div>
           Email address :
           <input type="text" data-testid="email" />
-          <span>{emailMessage}</span>
+          <div>{emailMessage}</div>
         </div>
+        <br />
         <div>
           Gender :
-          <select>
+          <select data-testid="gender">
             <option value="male" selected>
               Male
             </option>
             <option value="female">Female</option>
             <option value="other">Other</option>
           </select>
-          {/* <span>{message}</span> */}
         </div>
+        <br />
         <div>
           Phone Number :
           <input type="text" data-testid="phoneNumber" />
-          <span>{phoneMessage}</span>
+          <div>{phoneMessage}</div>
         </div>
+        <br />
         <div>
           Password :
-          <input type="text" data-testid="password" />
-          <span>{passwordMessage}</span>
+          <input type="password" data-testid="password" />
+          <div>{passwordMessage}</div>
         </div>
+        <br />
         <div>
           <input type="submit" data-testid="submit" />
         </div>
