@@ -25,7 +25,7 @@ const App = () => {
       setEmailMessage("");
       setPasswordMessage("");
     }
-    if (/[^0-9a-zA-Z]/.test(Name)) {
+    else if (/[^0-9a-zA-Z]/.test(Name)) {
       setNameMessage("Name is not alphanumeric");
       setCongrats("");
       setError("");
