@@ -1,4 +1,5 @@
 import React, { Component, useState } from "react";
+import '../styles/App.css';
 
 const App = () => {
   const [nameMessage, setNameMessage] = useState("");
