@@ -24,7 +24,8 @@ const App = () => {
       setNameMessage("");
       setEmailMessage("");
       setPasswordMessage("");
-    } else if (!isNaN(Name)) {
+    }
+    if (/[^0-9a-zA-Z]/.test(Name)) {
       setNameMessage("Name is not alphanumeric");
       setCongrats("");
       setError("");
